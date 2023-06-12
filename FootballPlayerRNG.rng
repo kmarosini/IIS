@@ -1,0 +1,58 @@
+﻿<rng:grammar xmlns:rng="http://relaxng.org/ns/structure/1.0"
+             xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+	<rng:start>
+		<rng:element name="player">
+			<rng:complexType>
+				<rng:sequence>
+					<rng:element name="id">
+						<rng:data type="xs:int"/>
+					</rng:element>
+					<rng:element name="name">
+						<rng:data type="xs:string"/>
+					</rng:element>
+					<rng:element name="firstname">
+						<rng:data type="xs:string"/>
+					</rng:element>
+					<rng:element name="lastname">
+						<rng:data type="xs:string"/>
+					</rng:element>
+					<rng:element name="age">
+						<rng:data type="xs:int"/>
+					</rng:element>
+					<rng:element name="birth">
+						<rng:complexType>
+							<rng:sequence>
+								<rng:element name="date">
+									<rng:data type="xs:string"/>
+								</rng:element>
+								<rng:element name="place">
+									<rng:data type="xs:string"/>
+								</rng:element>
+								<rng:element name="country">
+									<rng:data type="xs:string"/>
+								</rng:element>
+							</rng:sequence>
+						</rng:complexType>
+					</rng:element>
+					<rng:element name="nationality">
+						<rng:data type="xs:string"/>
+					</rng:element>
+					<rng:element name="height">
+						<rng:data type="xs:string"/>
+					</rng:element>
+					<rng:element name="weight">
+						<rng:data type="xs:string"/>
+					</rng:element>
+					<rng:element name="injured">
+						<rng:data type="xs:boolean"/>
+					</rng:element>
+					<rng:element name="photo">
+						<rng:data type="xs:anyURI"/>
+					</rng:element>
+				</rng:sequence>
+			</rng:complexType>
+		</rng:element>
+	</rng:start>
+
+</rng:grammar>
