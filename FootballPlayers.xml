@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<players>
+  <player id="1">
+    <name>Marlo Doe</name>
+    <nationality>English</nationality>
+    <age>25</age>
+  </player>
+  <player id="2">
+    <name>John Heloue</name>
+    <nationality>African</nationality>
+    <age>55</age>
+  </player>
+</players>
