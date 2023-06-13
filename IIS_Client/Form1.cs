@@ -41,12 +41,20 @@ namespace IIS_Client
         }
         private void button5_Click(object sender, EventArgs e)
         {
-
+            PrikaziFormuUPanelu(new Form2());
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
+            PrikaziFormuUPanelu(new Form3());
+        }
 
+        public void PrikaziFormuUPanelu(Form forma)
+        {
+            pnlGlavniPanel.Controls.Clear();
+            forma.TopLevel = false;
+            pnlGlavniPanel.Controls.Add(forma);
+            forma.Show();
         }
 
         private async void ValidateXSDAsync()
