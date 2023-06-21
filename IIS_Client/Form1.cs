@@ -32,13 +32,9 @@ namespace IIS_Client
 
         private void button3_Click(object sender, EventArgs e)
         {
-
+            PrikaziFormuUPanelu(new Form5());
         }
 
-        private void button4_Click(object sender, EventArgs e)
-        {
-
-        }
         private void button5_Click(object sender, EventArgs e)
         {
             PrikaziFormuUPanelu(new Form2());
