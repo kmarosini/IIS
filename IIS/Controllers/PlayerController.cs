@@ -26,6 +26,7 @@ namespace IIS.Controllers
             string xmlFilePath = Path.Combine(solutionDirectoryPath, "FootballPlayers.xml");
             string xsdFilePath = Path.Combine(solutionDirectoryPath, "FootballPlayer.xsd");
             Console.WriteLine(xmlFilePath);
+
             // Učitavanje XSD datoteke
             XmlSchemaSet schemas = new XmlSchemaSet();
             schemas.Add("", XmlReader.Create(xsdFilePath));
@@ -55,7 +56,7 @@ namespace IIS.Controllers
 
         public bool ProcessXmlFileWithRNG(IFormFile file)
         {
-            // Saving the file to a temporary location
+            // Saveanje na temp location
             var filePath = Path.GetTempFileName();
             using (var stream = System.IO.File.Create(filePath))
             {
@@ -66,14 +67,14 @@ namespace IIS.Controllers
             string xmlFilePath = Path.Combine(solutionDirectoryPath, "FootballPlayers.xml");
             string rngFilePath = Path.Combine(solutionDirectoryPath, "FootballPlayerRNG.rng");
 
-            // Loading the RNG file
+            // Učitavanje RNG
             RelaxngPattern rng;
             using (var rngReader = XmlReader.Create(rngFilePath))
             {
                 rng = RelaxngPattern.Read(rngReader);
             }
 
-            // Loading the XML file
+            // Učitavanja XML
             XmlDocument doc = new XmlDocument();
             doc.Load(file.OpenReadStream());
 
@@ -83,7 +84,7 @@ namespace IIS.Controllers
             {
                 try
                 {
-                    while (xmlReader.Read()) { } // Exception if invalid
+                    while (xmlReader.Read()) { }
                 }
                 catch (Exception ex)
                 {

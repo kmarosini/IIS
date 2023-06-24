@@ -20,24 +20,19 @@ namespace IIS_Client
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            // Get the search value from the TextBox
+          
             string searchValue = tbPlayer.Text;
 
-            // Create an instance of the web service client
             PlayerServiceSoapClient client = new PlayerServiceSoapClient();
            
-            // Call the SearchPlayer method of the web service
             string result = client.SearchPlayer(searchValue);
 
-            // Display the result or handle it as needed
             if (!string.IsNullOrEmpty(result))
             {
-                //MessageBox.Show(result, "Search Result");
                 lblResult.Text = result;
             }
             else
             {
-                //MessageBox.Show("No matching player found.", "Search Result");
                 lblResult.Text = "No player found.";
             }
 

@@ -56,34 +56,30 @@ namespace IIS_Client
         private async void ValidateXSDAsync()
         {
             //Pronalazak XSD i XML datoteke
-            string path = AppDomain.CurrentDomain.BaseDirectory; // Gets the bin/debug directory path
-            string solutionDirectoryPath = Directory.GetParent(path).Parent.Parent.Parent.FullName; // Navigates up to the solution directory
-            string fixedFilePath = Path.Combine(solutionDirectoryPath, "FootballPlayers.xml"); // Combines the solution directory path with the filename
-            string newFilePath = Path.GetTempFileName(); // Generate a unique temporary file path
+            string path = AppDomain.CurrentDomain.BaseDirectory; 
+            string solutionDirectoryPath = Directory.GetParent(path).Parent.Parent.Parent.FullName; 
+            string fixedFilePath = Path.Combine(solutionDirectoryPath, "FootballPlayers.xml"); 
+            string newFilePath = Path.GetTempFileName(); 
 
-            //Copy the original file into a temp one
+            //Copy originala u temp
             File.Copy(fixedFilePath, newFilePath, true);
 
-            // Open the editor for the temp file
             Process.Start("notepad++.exe", newFilePath)?.WaitForExit();
 
-            // Read the contents of the fixed file
             string fileContent = File.ReadAllText(newFilePath);
 
-            // Save the modified content to the new file
             File.WriteAllText(newFilePath, fileContent);
 
             using (var client = new HttpClient())
             {
+                // holdam datu koju saljem u request
                 var formContent = new MultipartFormDataContent();
 
                 var fileContentTemp = new ByteArrayContent(File.ReadAllBytes(newFilePath));
                 fileContentTemp.Headers.ContentType = MediaTypeHeaderValue.Parse("multipart/form-data");
 
-                // Add the new file to the POST request
                 formContent.Add(fileContentTemp, "file", Path.GetFileName(newFilePath));
 
-                // Send the POST request to the server
                 var response = await client.PostAsync("http://localhost:5285/api/Player/SaveWithXSD", formContent);
 
                 if (response.IsSuccessStatusCode)
@@ -99,22 +95,17 @@ namespace IIS_Client
 
         private async void ValidateRNGAsync()
         {
-            //Pronalazak XSD i XML datoteke
-            string path = AppDomain.CurrentDomain.BaseDirectory; // Gets the bin/debug directory path
-            string solutionDirectoryPath = Directory.GetParent(path).Parent.Parent.Parent.FullName; // Navigates up to the solution directory
-            string fixedFilePath = Path.Combine(solutionDirectoryPath, "FootballPlayers.xml"); // Combines the solution directory path with the filename
-            string newFilePath = Path.GetTempFileName(); // Generate a unique temporary file path
+            string path = AppDomain.CurrentDomain.BaseDirectory;
+            string solutionDirectoryPath = Directory.GetParent(path).Parent.Parent.Parent.FullName; 
+            string fixedFilePath = Path.Combine(solutionDirectoryPath, "FootballPlayers.xml"); 
+            string newFilePath = Path.GetTempFileName(); // unique file path
 
-            //Copy the original file into a temp one
             File.Copy(fixedFilePath, newFilePath, true);
 
-            // Open the editor for the temp file
             Process.Start("notepad++.exe", newFilePath)?.WaitForExit();
 
-            // Read the contents of the fixed file
             string fileContent = File.ReadAllText(newFilePath);
 
-            // Save the modified content to the new file
             File.WriteAllText(newFilePath, fileContent);
 
             using (var client = new HttpClient())
@@ -124,10 +115,8 @@ namespace IIS_Client
                 var fileContentTemp = new ByteArrayContent(File.ReadAllBytes(newFilePath));
                 fileContentTemp.Headers.ContentType = MediaTypeHeaderValue.Parse("multipart/form-data");
 
-                // Add the new file to the POST request
                 formContent.Add(fileContentTemp, "file", Path.GetFileName(newFilePath));
 
-                // Send the POST request to the server
                 var response = await client.PostAsync("http://localhost:5285/api/Player/SaveWithRNG", formContent);
 
                 if (response.IsSuccessStatusCode)
